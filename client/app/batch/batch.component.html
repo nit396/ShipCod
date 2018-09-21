@@ -1,0 +1,101 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card" *ngIf="!isLoading">
+  <h4 class="card-header">Import Data</h4>
+  <div class="card-body">
+    <form [formGroup]="batchForm" (ngSubmit)="addBatch()">
+      <div class="input-group" [ngClass]="setClassBatch()">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+        </div>
+        <input class="form-control" type="text" name="batch" formControlName="batch" placeholder="Batch" autofocus>
+      </div>
+
+      <div class="input-group" [ngClass]="setClassStage()">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-key"></i></span>
+        </div>
+        <input class="form-control" type="text" name="stage" formControlName="stage" placeholder="stage">
+      </div>
+
+      <div class="input-group" [ngClass]="setClassXML()">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-key"></i></span>
+        </div>
+        <input class="form-control" type="file" name="xmlFile" formControlName="xmlFile" (change)="uploadDocument($event)" #fileInput>
+      </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="!batchForm.valid"><i class="fa fa-sign-in"></i> Summit</button>
+    </form>
+  </div>
+</div>
+
+<div class="card" *ngIf="!isLoading">
+  <h4 class="card-header">Registered batchs ({{batchs.length}})</h4>
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Batch</th>
+          <th scope="col">Stage</th>
+          <th scope="col">Transaction</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="batchs.length === 0">
+        <tr>
+          <td colspan="4">There are no registered batch.</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr *ngFor="let batch of batchs">
+          <td>{{batch.batch}}</td>
+          <td>{{batch.stage}}</td>
+          <td><a target="_blank" rel="noopener noreferrer" href="https://rinkeby.etherscan.io/tx/{{batch.txHash}}">{{batch.txHash}}</a></td>
+          <td>
+            <button class="btn btn-sm btn-info" (click)="getdata(content, batch)">
+              <i class="fa fa-info"></i> Info
+            </button>
+            <button class="btn btn-sm btn-success ml-1" (click)="verifydata(verifyContent, batch)">
+              <i class="fa fa-check"></i> Verify
+            </button>
+            <button class="btn btn-sm btn-danger ml-1" (click)="deleteBatch(batch)">
+              <i class="fa fa-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Batch informations</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div *ngFor="let batch of batchInfo">{{batch | json}}</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #verifyContent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h3>{{verifyMessage}}</h3>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
