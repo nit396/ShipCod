@@ -13,17 +13,17 @@
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/shopper" class="nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isShopper">
+          <a routerLink="/shopper" class="nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isShopper || auth.isAdmin">
             <i class="fa fa-list"></i> Shopper
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/shipper" class="nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isShipper">
+          <a routerLink="/shipper" class="nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isShipper || auth.isAdmin">
             <i class="fa fa-list"></i> Shipper
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/customer" class="nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isCustomer">
+          <a routerLink="/customer" class="nav-link" routerLinkActive="active" *ngIf="auth.loggedIn && auth.isCustomer || auth.isAdmin">
             <i class="fa fa-list"></i> Customer
           </a>
         </li>

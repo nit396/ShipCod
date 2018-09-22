@@ -11,6 +11,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardLogin } from './services/auth-guard-login.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { BatchService } from './services/batch.service';
+import { OrderService } from './services/order.service';
 
 // Components
 import { AppComponent } from './app.component';
@@ -25,7 +26,7 @@ import { BatchComponent } from './batch/batch.component';
 import { ShopperComponent } from './shopper/shopper.component';
 import { ShipperComponent } from './shipper/shipper.component';
 import { CustomerComponent } from './customer/customer.component';
-
+import { NewOrderComponent } from './new-order/new-order.component'
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -43,7 +44,8 @@ export function tokenGetter() {
     BatchComponent,
     ShopperComponent,
     ShipperComponent,
-    CustomerComponent
+    CustomerComponent,
+    NewOrderComponent
   ],
   imports: [
     NgbModule,
@@ -61,7 +63,8 @@ export function tokenGetter() {
     AuthGuardLogin,
     AuthGuardAdmin,
     UserService,
-    BatchService
+    BatchService,
+    OrderService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

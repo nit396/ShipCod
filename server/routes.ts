@@ -2,6 +2,7 @@ import * as express from 'express';
 
 import UserCtrl from './controllers/user';
 import BatchCtrl from './controllers/batch';
+import OrderCtrl from './controllers/order'
 
 export default function setRoutes(app) {
 
@@ -9,6 +10,7 @@ export default function setRoutes(app) {
 
   const userCtrl = new UserCtrl();
   const batchCtrl = new BatchCtrl();
+  const orderCtrl = new OrderCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -30,6 +32,10 @@ export default function setRoutes(app) {
   router.route('/batch/:id').get(batchCtrl.get);
   router.route('/batch/:id').put(batchCtrl.update);
   router.route('/batch/:id').delete(batchCtrl.delete);
+
+  // Order
+  router.route('/createOrder').post(orderCtrl.insert);
+  // router.route('/getAllOrder').get(orderCtrl.get)
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
