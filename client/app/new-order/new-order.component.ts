@@ -41,10 +41,10 @@ export class NewOrderComponent {
   createOrder() {
     this.orderService.createOrder(this.orderForm.value).subscribe(
       res => {
-        this.toast.setMessage('you successfully registered!', 'success');
-        this.router.navigate(['/login']);
+        this.toast.setMessage('you successfully create new order!', 'success');
+        this.router.navigate(['/shopper']);
       },
-      error => this.toast.setMessage('email already exists', 'danger')
+      error => this.toast.setMessage('Fail create order', 'danger')
     );
   }
 }

@@ -23,6 +23,9 @@ export class RegisterComponent implements OnInit {
     Validators.minLength(3),
     Validators.maxLength(100)
   ]);
+  metaAddr = new FormControl('',
+    Validators.required
+  )
   password = new FormControl('', [
     Validators.required,
     Validators.minLength(6)
@@ -32,14 +35,15 @@ export class RegisterComponent implements OnInit {
   ]);
 
   constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              public toast: ToastComponent,
-              private userService: UserService) { }
+    private router: Router,
+    public toast: ToastComponent,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       username: this.username,
       email: this.email,
+      metaAddr: this.metaAddr,
       password: this.password,
       role: this.role
     });

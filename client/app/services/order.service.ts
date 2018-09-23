@@ -13,7 +13,15 @@ export class OrderService {
     return this.http.post<Order>('/api/createOrder', order);
   }
 
-  getOrder(): Observable<Order[]> {
-    return this.http.get<Order[]>('/api/getOrder');
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>('/api/getAllOrder');
+  }
+
+  shipperAccepted(id: string) {
+    return this.http.post('/api/shipperaccepted', id);
+  }
+
+  customerAccepted(id: string) {
+    return this.http.post('/api/customerAccepted', id);
   }
 }

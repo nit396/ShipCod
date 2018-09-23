@@ -35,7 +35,7 @@ export default function setRoutes(app) {
 
   // Order
   router.route('/createOrder').post(orderCtrl.insert);
-  // router.route('/getAllOrder').get(orderCtrl.get)
+  router.route('/getAllOrder').get(orderCtrl.getAll)
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
