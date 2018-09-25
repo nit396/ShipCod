@@ -35,7 +35,6 @@ export class NewOrderComponent {
       name: this.name,
       cost: this.cost,
       address: this.address,
-      UsrAddr: 'mobile give pill glass fiber round bullet brisk doctor decline abstract deal'
     });
   }
 
