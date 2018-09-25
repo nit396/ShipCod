@@ -33,8 +33,8 @@ export class CustomerComponent {
     );
   }
 
-  customerAccepted(id) {
-    this.orderService.customerAccepted(id).subscribe(
+  customerAccepted(order) {
+    this.orderService.customerAccepted(order).subscribe(
       res => {
         this.toast.setMessage('you successfully confirm!', 'success');
         this.router.navigate(['/shipper']);

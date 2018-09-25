@@ -17,11 +17,11 @@ export class OrderService {
     return this.http.get<Order[]>('/api/getAllOrder');
   }
 
-  shipperAccepted(id: string) {
-    return this.http.post('/api/shipperaccepted', id);
+  shipperAccepted(order) {
+    return this.http.post('/api/shipperaccepted', order);
   }
 
-  customerAccepted(id: string) {
-    return this.http.post('/api/customerAccepted', id);
+  customerAccepted(order) {
+    return this.http.post('/api/customerAccepted', order);
   }
 }

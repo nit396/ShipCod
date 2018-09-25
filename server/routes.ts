@@ -2,8 +2,9 @@ import * as express from 'express';
 
 import UserCtrl from './controllers/user';
 import BatchCtrl from './controllers/batch';
-import OrderCtrl from './controllers/order'
-import ShipperCtrl from './controllers/shipper'
+import OrderCtrl from './controllers/order';
+import ShipperCtrl from './controllers/shipper';
+import CustomerCtrl from './controllers/customer';
 
 export default function setRoutes(app) {
 
@@ -13,6 +14,7 @@ export default function setRoutes(app) {
   const batchCtrl = new BatchCtrl();
   const orderCtrl = new OrderCtrl();
   const shipperCtrl = new ShipperCtrl();
+  const customerCtrl = new CustomerCtrl();
 
   // Users
   router.route('/login').post(userCtrl.login);
@@ -41,6 +43,9 @@ export default function setRoutes(app) {
 
   // Shipper
   router.route('/shipperaccepted').post(shipperCtrl.shipperAccepted);
+
+  // Customer
+  router.route('/customerAccepted').post(customerCtrl.customerAccepted);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

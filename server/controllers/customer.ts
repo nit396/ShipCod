@@ -9,22 +9,20 @@ dotenv.load({ path: '.env' });
 import BaseCtrl from './base';
 import Batch from 'models/batch';
 
-export default class ShipperCtrl {
+export default class CustomerCtrl {
   //model = Order;
   ipfs = new IPFS({ host: process.env.IPFS_URI, port: 5001, protocol: 'https' });
 
-  shipperAccepted = (req, res) => {
-    console.log("shipperAccepted 111111111111111111111111111111111111111111111111");
+  customerAccepted = (req, res) => {
+    console.log("customerAccepted 111111111111111111111111111111111111111111111111");
     console.log(req.body);
-    //add UsrAddr into .env
-
     this.ipfs.addJSON(req.body, async (err, result) => {
       if (result) {
         const accounts = await web3.eth.getAccounts();
         console.log(accounts);
         goodschain.options.gasPrice = (process.env.GAS_PRICE).toString();
         goodschain.options.gas = process.env.GAS_LIMIT;
-        const data = await goodschain.methods.shipperAccepted(req.body.id).send({
+        const data = await goodschain.methods.customerComfirm(req.body.id).send({
           from: accounts[0],
           value: web3.utils.toWei(req.body.cost, 'ether')
         });
